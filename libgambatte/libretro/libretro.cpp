@@ -122,13 +122,9 @@ void retro_set_environment(retro_environment_t cb)
    environ_cb = cb;
 
    static const struct retro_variable vars[] = {
-<<<<<<< HEAD
       { "gambatte_gb_gbamode", "GBA mode; disabled|enabled" },
-      { "gambatte_gb_colorization", "GB Colorization; disabled|enabled|custom" },
-=======
       { "gambatte_gb_colorization", "GB Colorization; disabled|auto|internal|custom" },
       { "gambatte_gb_internal_palette", "Internal Palette; GBC - Blue|GBC - Brown|GBC - Dark Blue|GBC - Dark Brown|GBC - Dark Green|GBC - Grayscale|GBC - Green|GBC - Inverted|GBC - Orange|GBC - Pastel Mix|GBC - Red|GBC - Yellow|Special 1|Special 2|Special 3" },
->>>>>>> 6e69004... Expose Internal Palettes
       { "gambatte_gbc_color_correction", "Color correction; enabled|disabled" },
       { NULL, NULL },
    };
