@@ -122,13 +122,8 @@ void retro_set_environment(retro_environment_t cb)
    environ_cb = cb;
 
    static const struct retro_variable vars[] = {
-<<<<<<< HEAD
-      { "gambatte_gb_gbamode", "GBA mode; disabled|enabled" },
       { "gambatte_gb_colorization", "GB Colorization; disabled|auto|internal|custom" },
       { "gambatte_gb_internal_palette", "Internal Palette; GBC - Blue|GBC - Brown|GBC - Dark Blue|GBC - Dark Brown|GBC - Dark Green|GBC - Grayscale|GBC - Green|GBC - Inverted|GBC - Orange|GBC - Pastel Mix|GBC - Red|GBC - Yellow|Special 1|Special 2|Special 3" },
-=======
-      { "gambatte_gb_colorization", "GB Colorization; disabled|enabled|custom" },
->>>>>>> 803bd76... Here's how a properly done DMG flag works, #40.
       { "gambatte_gbc_color_correction", "Color correction; enabled|disabled" },
       { "gambatte_gb_hwmode", "Emulated hardware; Auto|GB|GBA" }, // unfortunately, libgambatte does not have a 'force GBC' flag
       { NULL, NULL },
@@ -377,21 +372,21 @@ static void check_variables(void)
       break;
         
       case 2:
-	    load_custom_palette();
+        load_custom_palette();
       break;
 	  
       case 3:
-	    var.key = "gambatte_gb_internal_palette";
-	    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-		{
-			// Load the selected internal palette
-			gbc_bios_palette = const_cast<unsigned short*>(findGbcDirPal(var.value));
-		}
+        var.key = "gambatte_gb_internal_palette";
+        if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+        {
+          // Load the selected internal palette
+          gbc_bios_palette = const_cast<unsigned short*>(findGbcDirPal(var.value));
+        }
       break;
 
       default:
-	    gbc_bios_palette = const_cast<unsigned short*>(findGbcDirPal("GBC - Grayscale"));
-	  break;
+        gbc_bios_palette = const_cast<unsigned short*>(findGbcDirPal("GBC - Grayscale"));
+      break;
    }
    //gambatte is using custom colorization then we have a previously palette loaded, 
    //skip this loop then
@@ -458,11 +453,7 @@ bool retro_load_game(const struct retro_game_info *info)
       if (!strcmp(var.value, "GBA")) flags |= gambatte::GB::GBA_CGB;
    }
 
-<<<<<<< HEAD
-   if (gb.load(info->data, info->size, gbamode ? gambatte::GB::GBA_CGB : 0))
-=======
    if (gb.load(info->data, info->size, flags) != 0)
->>>>>>> 803bd76... Here's how a properly done DMG flag works, #40.
       return false;
 
    rom_path = info->path ? info->path : "";
